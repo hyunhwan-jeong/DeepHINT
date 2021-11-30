@@ -26,19 +26,19 @@ def seq_matrix(seq_list, dim):
 def bed_to_fasta():
 	beds = ['data/GD_MSE_test_pos.bed','data/GD_MSE_test_neg.bed']
 	for bed in beds:
-		os.system("bedtools getfasta -fi ../ref/hg19_all.fa -bed " + bed +" -fo " + bed + ".fasta")
+		os.system("bedtools getfasta -fi ref/hg19_all.fa -bed " + bed +" -fo " + bed + ".fasta")
 
 def fasta_to_matrix():
 	seq_name = ['data/GD_MSE_test_pos.bed','data/GD_MSE_test_neg.bed']
 	
-	print seq_name
+	print(seq_name)
 	dim = 2000
-	print 'seq'
+	print('seq')
 	### Seq ###
 
 	for name in seq_name:
 		if 'pos' in name:
-			print name
+			print(name)
 			y = []
 			seq = []
 			positive_seq_file = open(name +'.fasta')
@@ -52,11 +52,11 @@ def fasta_to_matrix():
 					seq.append(line)
 
 			X1 = seq_matrix(seq,dim)
-			print 'pos_ending!'
+			print('pos_ending!')
 			np.save(name.split('.')[0], X1)
 
 		if 'neg' in name:
-			print name
+			print(name)
 			y = []
 			seq = []
 			negative_seq_file = open(name +'.fasta')
@@ -70,7 +70,7 @@ def fasta_to_matrix():
 					seq.append(line)
 
 			X0 = seq_matrix(seq,dim)
-			print 'neg_ending!'
+			print('neg_ending!')
 			np.save(name.split('.')[0], X0)
 
 	X = np.concatenate([X1,X0])
