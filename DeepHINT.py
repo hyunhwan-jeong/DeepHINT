@@ -20,7 +20,7 @@ from tensorflow.keras.layers import Embedding, LSTM, Input, concatenate, multipl
 from tensorflow.keras.layers import Convolution1D, MaxPooling1D
 from tensorflow.keras.layers import Bidirectional
 from tensorflow.keras.layers import Layer
-from tensorflow.keras.constraints import maxnorm
+from tensorflow.keras.constraints import MaxNorm
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from sklearn.metrics import fbeta_score, roc_curve, auc, roc_auc_score, average_precision_score
 import matplotlib.pyplot as plt
@@ -124,7 +124,7 @@ def set_up_model_up():
                         	  kernel_size = filter_length,
                         	  padding = 'valid',
                         	  activation = 'relu',
-                        	  kernel_constraint = maxnorm(3),
+                        	  kernel_constraint = MaxNorm(3),
                         	  subsample_length = 1)
 
 	pool_ma1 = MaxPooling1D(pool_size = 3)
