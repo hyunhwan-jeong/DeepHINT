@@ -9,28 +9,26 @@ import numbers
 from collections import Counter
 from warnings import warn
 from abc import ABCMeta, abstractmethod
+import tensorflow as tf
 
 np.random.seed(1337)  # for reproducibility
 
-from keras.optimizers import RMSprop, SGD
-from keras.models import Sequential, model_from_yaml
-from keras.layers.core import Dense, Dropout, Activation, Flatten
-import keras.layers.core as core
-from keras.layers import Dense, Dropout, Embedding, LSTM, Input, merge, multiply, Reshape
-from keras.layers.convolutional import Convolution1D, MaxPooling1D
-from keras.layers.wrappers import Bidirectional
-from keras.constraints import maxnorm
-from keras.layers.recurrent import LSTM, GRU
-from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.layers import Embedding
+from tensorflow.keras.optimizers import RMSprop, SGD
+from tensorflow.keras.models import Sequential, model_from_yaml
+from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
+from tensorflow.keras.layers import Embedding, LSTM, Input, merge, multiply, Reshape, GRU
+from tensorflow.keras.layers import Convolution1D, MaxPooling1D
+from tensorflow.keras.layers import Bidirectional
+from tensorflow.keras.layers import Layer
+from tensorflow.keras.constraints import maxnorm
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from sklearn.metrics import fbeta_score, roc_curve, auc, roc_auc_score, average_precision_score
 import matplotlib.pyplot as plt
-from keras.regularizers import l2, l1, l1_l2
-from keras.models import Model
-from keras import backend as K
-from keras.engine.topology import Layer
-from keras import activations, initializers, regularizers, constraints
-from keras.engine import InputSpec
+from tensorflow.keras.regularizers import l2, l1, l1_l2
+from tensorflow.keras.models import Model
+from tensorflow.keras import backend as K
+from tensorflow.keras import activations, initializers, regularizers, constraints
+from tensorflow.keras.layers import InputSpec
 
 
 class Attention(Layer):
