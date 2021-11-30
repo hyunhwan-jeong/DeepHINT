@@ -16,7 +16,7 @@ np.random.seed(1337)  # for reproducibility
 from tensorflow.keras.optimizers import RMSprop, SGD
 from tensorflow.keras.models import Sequential, model_from_yaml
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
-from tensorflow.keras.layers import Embedding, LSTM, Input, merge, multiply, Reshape, GRU
+from tensorflow.keras.layers import Embedding, LSTM, Input, concatenate, multiply, Reshape, GRU
 from tensorflow.keras.layers import Convolution1D, MaxPooling1D
 from tensorflow.keras.layers import Bidirectional
 from tensorflow.keras.layers import Layer
@@ -140,7 +140,9 @@ def set_up_model_up():
 	output_3 = attention_flatten(output_2._keras_shape[2])(att_decoder)
 
 	output_4 =  dense1(dropout2(Flatten()(output_2)))
-	all_outp =  merge([output_3, output_4], mode = 'concat')
+	# So Merge(mode='concat') is now concatenate(axis=-1).
+	# https://stackoverflow.com/questions/46397258/how-to-merge-sequential-models-in-keras-2-0
+	all_outp =  concatenate([output_3, output_4])
 	output_5 =  dense2(all_outp)
 	output_f =  Activation('sigmoid')(output_5)
 
