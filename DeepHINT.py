@@ -17,7 +17,7 @@ from tensorflow.keras.optimizers import RMSprop, SGD
 from tensorflow.keras.models import Sequential, model_from_yaml
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Embedding, LSTM, Input, concatenate, multiply, Reshape, GRU
-from tensorflow.keras.layers import Convolution1D, MaxPooling1D
+from tensorflow.keras.layers import Conv1D, MaxPooling1D
 from tensorflow.keras.layers import Bidirectional
 from tensorflow.keras.layers import Layer
 from tensorflow.keras.constraints import MaxNorm
@@ -120,12 +120,13 @@ def set_up_model_up():
 	attentionhidden = 256
 
 	seq_input = Input(shape = seq_input_shape, name = 'seq_input')
-	convul1   = Convolution1D(filters = nb_filter,
-                        	  kernel_size = filter_length,
-                        	  padding = 'valid',
-                        	  activation = 'relu',
-                        	  kernel_constraint = MaxNorm(3),
-                        	  subsample_length = 1)
+	convul1   = Conv1D(filters = nb_filter,
+						kernel_size = filter_length,
+						padding = 'valid',
+						activation = 'relu',
+						kernel_constraint = MaxNorm(3))
+						# I don't think subsample_length works for the new version of Keras
+						# subsample_length = 1)
 
 	pool_ma1 = MaxPooling1D(pool_size = 3)
 	dropout1 = Dropout(0.5977908689086315)
