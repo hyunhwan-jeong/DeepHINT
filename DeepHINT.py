@@ -258,7 +258,7 @@ def set_up_model_up():
     output_f = Activation("sigmoid")(output_5)
 
     model = Model(inputs=seq_input, outputs=output_f)
-    model.compile(loss="binary_crossentropy", optimizer="nadam", metrics=["accuracy"])
+    model.compile(loss="binary_crossentropy", optimizer="nadam", metrics=["accuracy", "AUC"])
 
     print(model.summary())
     return model
@@ -298,7 +298,16 @@ def test(n_estimators=16):
     print("aupr", aupr)
 
 
+def mock_test():
+    X = np.random.randint(2, size=(100000, 2000, 4))
+    Y = np.random.randint(2, size=(100000, 1))
+    model = set_up_model_up()
+    model.fit(X, Y, epochs=10, batch_size=32, verbose=1)
+    
+
+
 if __name__ == "__main__":
     set_up_model_up()
-    test(n_estimators=16)
+    mock_test()
+    # test(n_estimators=16)
 
