@@ -150,6 +150,12 @@ def set_up_model_up():
    output_4 =  dense1(dropout2(Flatten()(output_2)))
    # So Merge(mode='concat') is now concatenate(axis=-1).
    # https://stackoverflow.com/questions/46397258/how-to-merge-sequential-models-in-keras-2-0
+
+   # print("here!")
+   # print(output_3) 
+   # KerasTensor(type_spec=TensorSpec(shape=(None, None), dtype=tf.float32, name=None), name='attention_flatten/Reshape:0', description="created by layer 'attention_flatten'")
+   # print(output_4)
+   # KerasTensor(type_spec=TensorSpec(shape=(None, 1), dtype=tf.float32, name=None), name='dense/BiasAdd:0', description="created by layer 'dense'")
    all_outp =  concatenate([output_3, output_4])
    output_5 =  dense2(all_outp)
    output_f =  Activation('sigmoid')(output_5)
